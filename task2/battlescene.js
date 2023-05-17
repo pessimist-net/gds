@@ -29,6 +29,11 @@ var BattleScene = cc.Scene.extend({
 
         this.animation.setPosition(this.width / 2, this.height / 2);
         this.addChild(this.animation);
+
+        this.battle.onStart = function () {
+            this.attackButton.setEnabled(true);
+        }.bind(this);
+        this.battle.finish = this.finishAnimation.bind(this);
     },
 
     addBackground: function () {
@@ -81,8 +86,8 @@ var BattleScene = cc.Scene.extend({
         this.addChild(this.animation);
 
         var text = isVictory ? "VICTORY" : "WASTED";
-        var label = new cc.LabelTTF(text, "MarvinRound", 130, cc.TEXT_ALIGNMENT_CENTER);
-        label.setPosition(this.width / 2, this.height / 2 + 20);
+        var label = new cc.LabelTTF(text, resources.marvin_round.name, 130, cc.TEXT_ALIGNMENT_CENTER);
+        label.setPosition(this.width / 2, this.height / 2 + 50);
         label.setVisible(false);
         label.setAnchorPoint(0.5, 0.8);
         label.runAction(new cc.Sequence(

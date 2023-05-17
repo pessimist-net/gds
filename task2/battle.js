@@ -7,13 +7,16 @@ var Battle = function () {
     this.enemy = new Solder('enemy');
 
     setTimeout(this.start.bind(this), 3000);
+
+    this.onStart = function () {};
+    this.finish = function () {};
 };
 
 Battle.prototype.start = function () {
     this.running = true;
 
     console.log("Started!");
-    cc.director.getRunningScene().attackButton.setEnabled(true);
+    this.onStart();
 
     this.interval = setInterval(this.run.bind(this), 100);
 };
@@ -36,7 +39,7 @@ Battle.prototype.run = function () {
 };
 
 Battle.prototype.stop = function () {
-    cc.director.getRunningScene().finishAnimation(this.solder.isAlive());
+    this.finish(this.solder.isAlive());
     this.running = false;
 
     console.log("Stopped!");
