@@ -334,5 +334,5 @@ function addSpecialEffects(tilesToDelete){
 		}
 	});
 	
-	return Array.from(allTilesToDelete);
+	return allTilesToDelete;
 }
